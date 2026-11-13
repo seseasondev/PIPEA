@@ -36,6 +36,13 @@ Supabase **PIPEA** (`kbgzpwvsswozdnhfaoul`). Incluyen:
 - Bucket privado `evidencias` (solo PDF, 20 MB) con ruta `{organizacion}/{periodo}/{actividad}/archivo.pdf`.
 - Datos iniciales: 5 organizaciones, 5 ejes, Eje 1 completo (11 prioridades, 25 actividades) y periodos 2026–2027.
 
+## Carga de evidencias
+
+- La administración abre cada trimestre y fija la fecha límite en `/admin/periodos`; ahí también registra reaperturas (quién autorizó y por qué).
+- Cada organización entra a su actividad y sube PDF por fuente de información. Los archivos van directo del navegador a Supabase Storage.
+- Para enviar a revisión se necesitan archivos de al menos 3 fuentes distintas (regla aplicada en la base de datos). Si después quitan archivos y quedan menos de 3, la entrega vuelve a borrador.
+- Evaluadores y administración ven las entregas y abren los PDF con enlaces temporales.
+
 ## Acceso
 
 Correo institucional + contraseña, **sin registro público**. La administración crea
