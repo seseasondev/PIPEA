@@ -11,7 +11,12 @@ export default async function LayoutApp({ children }: { children: React.ReactNod
           <nav className="flex items-center gap-4">
             <Link href="/" className="font-titulo font-extrabold text-lg text-berenjena">PIPEA</Link>
             <Link href="/" className="text-sm font-medium hover:text-primario">Panel</Link>
-            {perfil.rol === "admin" && <Link href="/admin/usuarios" className="text-sm font-medium hover:text-primario">Usuarios</Link>}
+            {perfil.rol === "admin" && (
+              <>
+                <Link href="/admin/periodos" className="text-sm font-medium hover:text-primario">Trimestres</Link>
+                <Link href="/admin/usuarios" className="text-sm font-medium hover:text-primario">Usuarios</Link>
+              </>
+            )}
           </nav>
           <div className="flex items-center gap-3 text-sm">
             <span className="text-texto-suave">

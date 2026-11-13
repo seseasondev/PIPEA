@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Antetitulo, Etiqueta, Migas, Tarjeta, colorEje } from "@/components/ui";
 import { obtenerPerfil } from "@/lib/sesion";
@@ -101,10 +102,13 @@ export default async function PaginaPrioridad({
                   </div>
                 )}
               </dl>
-              {esOrg && propia && (
-                <p className="mt-4 text-sm text-texto-suave">
-                  La carga de evidencias de esta actividad estará disponible en el siguiente módulo.
-                </p>
+              {(propia || !esOrg) && (
+                <Link
+                  href={`/ejes/${datos.eje.numero}/prioridades/${datos.numero}/actividades/${a.id}`}
+                  className="mt-4 inline-flex h-10 items-center rounded-boton px-4 text-sm font-semibold bg-primario text-primario-texto hover:bg-primario-hover"
+                >
+                  {propia ? "Cargar evidencias" : "Ver entregas"}
+                </Link>
               )}
             </Tarjeta>
           );
