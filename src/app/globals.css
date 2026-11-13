@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/*
+ * Tokens de diseño tomados del prototipo de Figma Make (Portal de Calificaciones).
+ * Las vistas usan solo estos nombres; para cambiar el estilo se edita aquí.
+ * Ajustes respecto al prototipo: tamaño mínimo de texto 12 px (el prototipo usaba
+ * 8–10 px) y semáforo con verde/amarillo/rojo semánticos, no con la paleta de marca.
+ */
+:root {
+  /* Marca */
+  --naranja: #dc7f37;
+  --coral: #b94645;
+  --vino: #9b2f3e;
+  --berenjena: #410324;
+  --magenta: #960e53;
+
+  /* Roles */
+  --primario: var(--magenta);
+  --primario-hover: var(--vino);
+  --primario-texto: #ffffff;
+  --primario-suave: #f7e7ef;
+  --peligro: var(--coral);
+
+  /* Superficies y bordes */
+  --fondo: #fbf8f9;
+  --superficie: #ffffff;
+  --superficie-sutil: #fdfafb;
+  --pastilla: #efe5ea;
+  --borde: #e8dce2;
+  --borde-input: #e1d1d9;
+  --divisor: #f1e8ec;
+
+  /* Texto */
+  --texto: var(--berenjena);
+  --texto-fuerte: #543447;
+  --texto-suave: #745868;
+  --texto-tenue: #7f8393;
+
+  /* Semáforo */
+  --verde: #1f8a4c;
+  --amarillo: #c99a06;
+  --rojo: #c0392b;
+
+  /* Colores por eje (1–5) */
+  --eje-1: #dc7f37; --eje-1-suave: #fcf2ea;
+  --eje-2: #b94645; --eje-2-suave: #f9ecec;
+  --eje-3: #9b2f3e; --eje-3-suave: #f7e9eb;
+  --eje-4: #410324; --eje-4-suave: #f2e8ee;
+  --eje-5: #960e53; --eje-5-suave: #f7e7ef;
+
+  --sombra-tarjeta: 0 3px 11px rgba(46, 50, 80, 0.025);
+  --sombra-tarjeta-hover: 0 8px 20px rgba(42, 47, 80, 0.08);
+  --anillo-foco: 0 0 0 3px var(--primario-suave);
+}
+
+@theme inline {
+  --color-naranja: var(--naranja);
+  --color-coral: var(--coral);
+  --color-vino: var(--vino);
+  --color-berenjena: var(--berenjena);
+  --color-magenta: var(--magenta);
+  --color-primario: var(--primario);
+  --color-primario-hover: var(--primario-hover);
+  --color-primario-texto: var(--primario-texto);
+  --color-primario-suave: var(--primario-suave);
+  --color-peligro: var(--peligro);
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-pastilla: var(--pastilla);
+  --color-borde: var(--borde);
+  --color-borde-input: var(--borde-input);
+  --color-divisor: var(--divisor);
+  --color-texto: var(--texto);
+  --color-texto-fuerte: var(--texto-fuerte);
+  --color-texto-suave: var(--texto-suave);
+  --color-texto-tenue: var(--texto-tenue);
+  --color-verde: var(--verde);
+  --color-amarillo: var(--amarillo);
+  --color-rojo: var(--rojo);
+
+  --radius-sm: 6px;
+  --radius-boton: 11px;
+  --radius-tarjeta: 13px;
+  --radius-panel: 14px;
+  --radius-pastilla: 20px;
+
+  --shadow-tarjeta: var(--sombra-tarjeta);
+  --shadow-tarjeta-hover: var(--sombra-tarjeta-hover);
+  --shadow-foco: var(--anillo-foco);
+
+  --font-sans: "DM Sans Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-titulo: "Manrope Variable", "DM Sans Variable", system-ui, sans-serif;
+}
+
+body {
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-titulo);
+  letter-spacing: -0.3px;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--anillo-foco);
+}
