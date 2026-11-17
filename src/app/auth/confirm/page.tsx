@@ -1,5 +1,6 @@
 import { Boton, Tarjeta } from "@/components/ui";
 import { confirmarEnlace } from "./actions";
+import { SesionDesdeHash } from "./sesion-hash";
 
 // Destino de los enlaces de correo (recuperación de contraseña, invitación).
 export default async function ConfirmarEnlace({
@@ -29,9 +30,13 @@ export default async function ConfirmarEnlace({
             <Boton type="submit" className="w-full">Continuar</Boton>
           </form>
         ) : (
-          <p className="text-sm text-peligro">
-            El enlace está incompleto o ya se usó. Pide uno nuevo en «¿Olvidaste tu contraseña?».
-          </p>
+          <>
+            <SesionDesdeHash destino={next && next.startsWith("/") && !next.startsWith("//") ? next : "/cambiar-contrasena"} />
+            <p className="text-sm text-texto-suave">
+              Si esta página no avanza sola, el enlace está incompleto o ya se usó. Pide uno nuevo en
+              «¿Olvidaste tu contraseña?».
+            </p>
+          </>
         )}
       </Tarjeta>
     </main>
