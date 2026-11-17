@@ -52,3 +52,19 @@ export async function cambiarActivo(formData: FormData) {
   await admin.auth.admin.updateUserById(id, { ban_duration: activo ? "none" : "876000h" });
   revalidatePath("/admin/usuarios");
 }
+
+// Asigna o cambia el rol de una cuenta existente (por ejemplo, una creada
+// desde el panel de Supabase, que llega sin rol).
+export async function asignarRol(formData: FormData) {
+  const yo = await exigirRol("admin");
+  const id = String(formData.get("id") ?? "");
+  const rol = String(formData.get("rol") ?? "") as Rol;
+  const organizacionId = rol === "organizacion" ? String(formData.get("organizacion_id") ?? "") || null : null;
+  if (!id || id === yo.id || !ROLES.includes(rol)) return;
+  if (rol === "organizacion" && !organizacionId) return;
+
+  const admin = createAdminClient();
+  await admin.auth.admin.updateUserById(id, { app_metadata: { rol, organizacion_id: organizacionId } });
+  await admin.from("perfiles").update({ rol, organizacion_id: organizacionId }).eq("id", id);
+  revalidatePath("/admin/usuarios");
+}

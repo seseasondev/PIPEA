@@ -52,8 +52,16 @@ Primera cuenta de administración (una sola vez):
 1. Supabase → Authentication → Users → *Add user* (marca *Auto Confirm User*).
 2. En el SQL Editor: `update perfiles set rol = 'admin' where correo = 'tu@correo.gob.mx';`
 
-En Supabase → Authentication → Sign In / Providers desactiva **Allow new users to sign up**,
-y en URL Configuration agrega la URL del sitio y `<sitio>/auth/confirm` a las Redirect URLs.
+En Supabase → Authentication:
+- Sign In / Providers: desactiva **Allow new users to sign up**.
+- URL Configuration: **Site URL** = URL pública (p. ej. `https://pipea.vercel.app`, nunca `localhost`)
+  y en Redirect URLs agrega `https://pipea.vercel.app/**`.
+- Emails → **Reset Password**: cambia el enlace del cuerpo por
+  `<a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=recovery&next=/cambiar-contrasena">Restablecer contraseña</a>`.
+  Así el enlace funciona aunque se abra en otro navegador o dispositivo, y la página pide pulsar
+  «Continuar» para que los antivirus de correo no gasten el enlace.
+
+Las cuentas creadas desde el panel de Supabase llegan **sin rol**; asígnalo en `/admin/usuarios`.
 
 ## Despliegue
 

@@ -2,6 +2,7 @@ import { Migas, Tarjeta } from "@/components/ui";
 import { NOMBRE_ROL, exigirRol, type Rol } from "@/lib/sesion";
 import { createClient } from "@/lib/supabase/server";
 import { cambiarActivo } from "./actions";
+import { FormRol } from "./fila-rol";
 import { FormNuevoUsuario } from "./form";
 
 export default async function PaginaUsuarios() {
@@ -10,7 +11,7 @@ export default async function PaginaUsuarios() {
   const [{ data: perfiles }, { data: orgs }] = await Promise.all([
     supabase
       .from("perfiles")
-      .select("id, correo, nombre, rol, activo, organizacion:organizaciones(clave)")
+      .select("id, correo, nombre, rol, activo, organizacion_id, organizacion:organizaciones(clave)")
       .order("rol")
       .order("correo"),
     supabase.from("organizaciones").select("id, clave, nombre").order("clave"),
@@ -48,7 +49,13 @@ export default async function PaginaUsuarios() {
                 <tr key={p.id} className="border-b border-borde last:border-0">
                   <td className="p-3">{p.nombre ?? "—"}</td>
                   <td className="p-3">{p.correo}</td>
-                  <td className="p-3">{p.rol ? NOMBRE_ROL[p.rol as Rol] : "Sin rol"}{org ? ` · ${org.clave}` : ""}</td>
+                  <td className="p-3">
+                    {p.id === yo.id ? (
+                      <span>{p.rol ? NOMBRE_ROL[p.rol as Rol] : "Sin rol"}{org ? ` · ${org.clave}` : ""}</span>
+                    ) : (
+                      <FormRol id={p.id} rol={p.rol} organizacionId={p.organizacion_id} organizaciones={orgs ?? []} />
+                    )}
+                  </td>
                   <td className="p-3">{p.activo ? "Activa" : "Desactivada"}</td>
                   <td className="p-3 text-right">
                     {p.id !== yo.id && (
